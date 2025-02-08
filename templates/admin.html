@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        // Adicionar antes de fechar o head
+        function playNotificationSound() {
+            const audio = new Audio("{{ url_for('static', filename='notification.mp3') }}");
+            audio.play();
+        }
+        
+        function addNovoPedido(pedido) {
+            const pedidosLista = document.querySelector('.pedidos-list');
+            const divPedido = document.createElement('div');
+            divPedido.className = 'pedido-card novo-pedido';
+            divPedido.setAttribute('data-id', pedido.id);
+            
+            divPedido.innerHTML = `
+                <div class="pedido-header">
+                    <h3>Pedido #${pedido.id}</h3>
+                    <span class="status-badge ${pedido.status}">${pedido.status}</span>
+                </div>
+                <div class="pedido-info">
+                    <p><strong>Cliente:</strong> ${pedido.cliente_nome}</p>
+                    <p><strong>Data:</strong> ${pedido.data_pedido.split(' ')[0]}</p>
+                    <p><strong>Total:</strong> R$ ${pedido.valor_total.toFixed(2)}</p>
+                </div>
+                <div class="pedido-actions">
+                    <div class="pedido-actions-left">
+                        <button class="view-details-btn" onclick="showPedidoDetalhes(${pedido.id})">
+                            Ver Detalhes
+                        </button>
+                        <select class="status-select" onchange="atualizarStatus(${pedido.id}, this.value)">
+                            <option value="pendente" ${pedido.status === 'pendente' ? 'selected' : ''}>Pendente</option>
+                            <option value="preparo" ${pedido.status === 'preparo' ? 'selected' : ''}>Em Preparo</option>
+                            <option value="entrega" ${pedido.status === 'entrega' ? 'selected' : ''}>Em Entrega</option>
+                            <option value="concluido" ${pedido.status === 'concluido' ? 'selected' : ''}>Concluído</option>
+                            <option value="cancelado" ${pedido.status === 'cancelado' ? 'selected' : ''}>Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="pedido-actions-right">
+                        <button class="print-btn" onclick="imprimirPedido(${pedido.id})">
+                            <i class="fas fa-print"></i>
+                        </button>
+                        <button class="delete-btn" onclick="confirmarExclusao(${pedido.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Inserir no início da lista
+            pedidosLista.insertBefore(divPedido, pedidosLista.firstChild);
+            
+            // Efeito de destaque
+            setTimeout(() => divPedido.classList.remove('novo-pedido'), 3000);
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/print-assistant.js') }}"></script>
+</head>
+<body>
+    <header class="admin-header">
+        <h1>Painel Administrativo</h1>
+        <a href="/" class="back-btn">Voltar ao Cardápio</a>
+    </header>
+
+    <main class="admin-container">
+        <h2 class="section-title">Pedidos</h2>
+        <div class="pedidos-list">
+            {% for pedido in pedidos %}
+            <div class="pedido-card" data-id="{{ pedido.id }}">
+                <div class="pedido-header">
+                    <h3>Pedido #{{ pedido.id }}</h3>
+                    <span class="status-badge {{ pedido.status }}">{{ pedido.status }}</span>
+                </div>
+                <div class="pedido-info">
+                    <p><strong>Cliente:</strong> {{ pedido.cliente_nome }}</p>
+                    <p><strong>Data:</strong> {{ pedido.data_pedido.split(' ')[0] }}</p>
+                    <p><strong>Total:</strong> R$ {{ "%.2f"|format(pedido.valor_total) }}</p>
+                </div>
+                <div class="pedido-actions">
+                    <div class="pedido-actions-left">
+                        <button class="view-details-btn" onclick="showPedidoDetalhes({{ pedido.id }})">
+                            Ver Detalhes
+                        </button>
+                        <select class="status-select" onchange="atualizarStatus({{ pedido.id }}, this.value)">
+                            <option value="pendente" {% if pedido.status == 'pendente' %}selected{% endif %}>Pendente</option>
+                            <option value="preparo" {% if pedido.status == 'preparo' %}selected{% endif %}>Em Preparo</option>
+                            <option value="entrega" {% if pedido.status == 'entrega' %}selected{% endif %}>Em Entrega</option>
+                            <option value="concluido" {% if pedido.status == 'concluido' %}selected{% endif %}>Concluído</option>
+                            <option value="cancelado" {% if pedido.status == 'cancelado' %}selected{% endif %}>Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="pedido-actions-right">
+                        <button class="print-btn" onclick="imprimirPedido({{ pedido.id }})">
+                            <i class="fas fa-print"></i>
+                        </button>
+                        <button class="delete-btn" onclick="confirmarExclusao({{ pedido.id }})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- Modal de Detalhes do Pedido -->
+    <div id="detalhesModal" class="modal">
+        <div class="modal-content">
+            <h2>Detalhes do Pedido #<span id="pedidoId"></span></h2>
+            <div id="pedidoDetalhes"></div>
+            <button class="close-modal" onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Exclusão</h2>
+            <p>Tem certeza que deseja excluir este pedido?</p>
+            <div class="modal-actions">
+                <button class="cancel-button" onclick="fecharModalExclusao()">Cancelar</button>
+                <button class="delete-button" onclick="excluirPedido()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/print-assistant.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.orderUpdater = new OrderUpdater();
+        });
+    </script>
+</body>
+</html>

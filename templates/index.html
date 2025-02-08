@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Digital</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="toast-container"></div>
+    
+    <div class="cart-icon" id="cartIcon">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+
+    <div class="cart-modal" id="cartModal">
+        <h3>Carrinho</h3>
+        <div class="cart-items" id="cartItems">
+            <!-- Items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            <strong>Total: R$ <span id="cartTotal">0.00</span></strong>
+        </div>
+        <button class="checkout-button" onclick="showCheckoutModal()">Finalizar Pedido</button>
+    </div>
+
+    <!-- Modal de Checkout -->
+    <div id="checkoutModal" class="checkout-modal">
+        <div class="checkout-content">
+            <h3>Finalizar Pedido</h3>
+            <form id="checkoutForm" onsubmit="submitCheckout(event)">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required minlength="3">
+                </div>
+                <div class="form-group">
+                    <label for="address">Endereço:</label>
+                    <textarea id="address" name="address" required minlength="10"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-button" onclick="closeCheckoutModal()">Cancelar</button>
+                    <button type="submit" class="confirm-button">Confirmar Pedido</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <header>
+        <h1>Nosso Cardápio</h1>
+    </header>
+    
+    <main>
+        {% for category, items in menu_categories.items() %}
+        <section class="category-section">
+            <h2 class="category-title">{{ category.title() }}</h2>
+            <div class="menu-container">
+                {% for item in items %}
+                <div class="menu-item" data-id="{{ item.id }}">
+                    {% if item.image %}
+                    <div class="menu-item-image">
+                        <img src="{{ item.image }}" alt="{{ item.name }}">
+                    </div>
+                    {% endif %}
+                    <div class="menu-item-content">
+                        <h3>{{ item.name }}</h3>
+                        {% if item.description %}
+                        <p class="description">{{ item.description }}</p>
+                        {% endif %}
+                        <div class="price-action">
+                            <p class="price">R$ {{ "%.2f"|format(item.price) }}</p>
+                            <button class="order-button">Pedir</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endfor %}
+    </main>
+    
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+{
+    "sanduiches": [
+        {
+            "id": 1,
+            "name": "MISTO QUENTE",
+            "description": "",
+            "price": 6.00,
+            "image": "https://example.com/images/misto-quente.jpg"
+        },
+        {
+            "id": 2,
+            "name": "X-SALADA",
+            "description": "Pão, presunto, queijo e tomate",
+            "price": 8.00,
+            "image": "https://example.com/images/x-salada.jpg"
+        },
+        {
+            "id": 3,
+            "name": "X-BURGER",
+            "description": "Pão, hambúrguer, presunto, queijo, alface e tomate",
+            "price": 12.00,
+            "image": "https://example.com/images/x-burger.jpg"
+        },
+        {
+            "id": 4,
+            "name": "X-BACON",
+            "description": "Pão, hambúrguer, bacon, presunto, queijo, milho, batata palha, alface e tomate",
+            "price": 18.00,
+            "image": "https://example.com/images/x-bacon.jpg"
+        },
+        {
+            "id": 5,
+            "name": "X-EGG",
+            "description": "Pão, hambúrguer, ovo, presunto, queijo, milho, batata palha, alface e tomate",
+            "price": 13.00,
+            "image": "https://example.com/images/x-egg.jpg"
+        },
+        {
+            "id": 6,
+            "name": "X-CALABRESA",
+            "description": "Pão, hambúrguer, calabresa, presunto, queijo, milho, batata palha, alface e tomate",
+            "price": 15.00,
+            "image": "https://example.com/images/x-calabresa.jpg"
+        },
+        {
+            "id": 7,
+            "name": "X-FRANGO COM CATUPIRY",
+            "description": "Pão, filé de frango, catupiry, alface, presunto, queijo, tomate, milho, batata palha, maionese",
+            "price": 18.00,
+            "image": "https://example.com/images/x-frango-catupiry.jpg"
+        },
+        {
+            "id": 8,
+            "name": "X-BIG DOG",
+            "description": "Pão, carne moída, salsicha, milho, batata palha, alface e tomate",
+            "price": 12.00,
+            "image": "https://example.com/images/x-big-dog.jpg"
+        }
+    ],
+    "bebidas": [
+        {
+            "id": 101,
+            "name": "Refrigerante Lata",
+            "description": "350ml",
+            "price": 5.00,
+            "image": "https://example.com/images/refrigerante-lata.jpg"
+        },
+        {
+            "id": 102,
+            "name": "Refrigerante 1L",
+            "description": "",
+            "price": 9.00,
+            "image": "https://example.com/images/refrigerante-1l.jpg"
+        },
+        {
+            "id": 103,
+            "name": "Refrigerante 2L",
+            "description": "",
+            "price": 15.00,
+            "image": "https://example.com/images/refrigerante-2l.jpg"
+        },
+        {
+            "id": 104,
+            "name": "Suco na Jarra",
+            "description": "1,2L",
+            "price": 16.00,
+            "image": "https://example.com/images/suco-jarra.jpg"
+        },
+        {
+            "id": 105,
+            "name": "Suco",
+            "description": "Copo 400ml",
+            "price": 6.00,
+            "image": "https://example.com/images/suco-copo.jpg"
+        }
+    ],
+    "pizzas": [
+        {
+            "id": 201,
+            "name": "4 Queijos",
+            "description": "Massa, molho, mussarela, catupiry, cheddar, orégano e tomate",
+            "price": 50.00,
+            "image": "https://example.com/images/pizza-4-queijos.jpg"
+        },
+        {
+            "id": 202,
+            "name": "Calabresa",
+            "description": "Massa, molho, mussarela, calabresa, cebola, orégano e tomate",
+            "price": 50.00,
+            "image": "https://example.com/images/pizza-calabresa.jpg"
+        },
+        {
+            "id": 203,
+            "name": "Frango com Catupiry",
+            "description": "Massa, molho, mussarela, frango, catupiry, milho, orégano e tomate",
+            "price": 50.00,
+            "image": "https://example.com/images/pizza-frango-catupiry.jpg"
+        }
+    ],
+    "jantinha": [
+        {
+            "id": 301,
+            "name": "Filé com Fritas",
+            "description": "Arroz branco, filé mignon picado, batata frita, salada",
+            "price": 22.00,
+            "image": "https://example.com/images/file-fritas.jpg"
+        },
+        {
+            "id": 302,
+            "name": "Strogonoff",
+            "description": "Arroz branco, strogonoff de frango, batata palha",
+            "price": 22.00,
+            "image": "https://example.com/images/strogonoff.jpg"
+        },
+        {
+            "id": 303,
+            "name": "Arroz Carreteiro",
+            "description": "Arroz com carne de sol, bacon, calabresa e salada",
+            "price": 20.00,
+            "image": "https://example.com/images/arroz-carreteiro.jpg"
+        }
+    ],
+    "acai": [
+        {
+            "id": 401,
+            "name": "Açaí na Tijela 300ml",
+            "description": "Acompanhamentos separados: Amendoim, Granola, Tapioca, Leite Condensado, Leite Pó e Banana",
+            "price": 14.00,
+            "image": "https://example.com/images/acai-300ml.jpg"
+        },
+        {
+            "id": 402,
+            "name": "Açaí na Tijela 500ml",
+            "description": "Acompanhamentos separados: Amendoim, Granola, Tapioca, Leite Condensado, Leite Pó e Banana",
+            "price": 18.00,
+            "image": "https://example.com/images/acai-500ml.jpg"
+        },
+        {
+            "id": 403,
+            "name": "Açaí Kids na Tigela",
+            "description": "300ml (Disquete, Tubete, nutella, Jujuba, Leite pó, leite condensado, morango)",
+            "price": 15.00,
+            "image": "https://example.com/images/acai-kids.jpg"
+        }
+    ]
+}

@@ -1,0 +1,332 @@
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.back-btn {
+    background: #333;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.pedidos-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.pedido-card {
+    background: #1f1f1f;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+}
+
+.status-badge.pendente { background: #ffd700; color: #000; }
+.status-badge.preparo { background: #ff9800; color: #fff; }
+.status-badge.entrega { background: #2196f3; color: #fff; }
+.status-badge.concluido { background: #4ecca3; color: #fff; }
+.status-badge.cancelado { background: #ff5733; color: #fff; }
+
+.pedido-actions {
+    display: flex;
+    justify-content: space-between; /* Mudança aqui para espaçar os grupos de botões */
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.pedido-actions-left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.pedido-actions-right {
+    display: flex;
+    align-items: center;
+}
+
+.view-details-btn {
+    background: #4ecca3;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 120px;  /* Largura mínima para manter consistência */
+}
+
+.status-select {
+    background: #333;
+    color: white;
+    border: 1px solid #444;
+    padding: 0.5rem;
+    border-radius: 4px;
+    min-width: 120px;  /* Largura mínima para manter consistência */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #1f1f1f;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+}
+
+.close-modal {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.print-btn {
+    background: #4ecca3;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.print-btn:hover {
+    background: #45b393;
+}
+
+.print-btn i {
+    font-size: 1.1rem;
+}
+
+.pedido-actions .print-btn {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.pedido-actions .print-btn:hover {
+    background: #777;
+}
+
+.pedido-actions .print-btn i {
+    font-size: 1.1rem;
+}
+
+.delete-btn {
+    background: #ff5733;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+    background: #ff4418;
+}
+
+.delete-btn i {
+    font-size: 1.1rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.delete-button {
+    background: #ff5733;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.delete-button:hover {
+    background: #ff4418;
+}
+
+.section-title {
+    color: #4ecca3; /* Mudado para verde para manter consistência */
+    font-size: 1.8rem;
+    margin: 2rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4ecca3;
+}
+
+/* Estilos para impressão */
+@media print {
+    .back-btn, 
+    .print-btn,
+    .pedido-actions,
+    .close-modal {
+        display: none !important;
+    }
+
+    .pedido-card {
+        page-break-inside: avoid;
+        border: 1px solid #ddd;
+        margin-bottom: 1rem;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .pedido-card,
+    .modal-content {
+        background: white !important;
+        color: black !important;
+    }
+
+    .status-badge {
+        border: 1px solid #333;
+    }
+}
+
+.novo-pedido {
+    animation: highlight 3s ease-out;
+    border: 2px solid #4ecca3;
+}
+
+@keyframes highlight {
+    0% {
+        background-color: #4ecca3;
+        transform: scale(1.02);
+    }
+    100% {
+        background-color: #1f1f1f;
+        transform: scale(1);
+    }
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #121212;
+}
+
+.login-box {
+    background: #1f1f1f;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.login-box h2 {
+    color: #4ecca3;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.error-message {
+    background: #ff5733;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.login-button {
+    background: #4ecca3;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.login-button:hover {
+    background: #45b393;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #666;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: #4ecca3;
+}
